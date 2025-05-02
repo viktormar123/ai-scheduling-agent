@@ -1,3 +1,12 @@
+"""
+LEGACY MODULE – kept for reference only
+--------------------------------------
+This file contains the first‑generation, highly structured scheduling agent
+prototype.  It has been superseded by `agent2.py`, which provides a more
+flexible, conversational workflow.  The code in this module is **no longer
+executed** by default; feel free to browse it for historical context or
+implementation ideas, but use `agent2.py` for all practical purposes.
+"""
 # agent.py
 from tools import AVAILABLE_TOOLS, tool_functions, format_schedule_by_shift
 import openai

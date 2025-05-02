@@ -1,3 +1,20 @@
+"""
+---------------------------------------------------------------------------
+ Legacy script (v1) — superseded by `agent2.py`
+ ---------------------------------------------------------------------------
+ This `run.py` launcher belonged to the first‑generation CLI workflow
+ that paired with `agent.py`.  The original design relied on rigid chat
+ commands such as `create basic`, `create optimized`, etc.
+
+ The current recommended entry point is **`agent2.py`**, which supports a
+ more natural, free‑form conversation and automatic tool invocation.
+ `run.py` is kept only for archival purposes and for anyone interested in
+ the original structured prototype.  It is **not used** by the final
+ report or demo.
+
+ Feel free to ignore this file unless you want to explore the legacy
+ implementation.
+"""
 # run.py
 
 from agent import SchedulingAgent

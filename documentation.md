@@ -1,7 +1,6 @@
 # Scheduling Agent — Code Documentation
 
-This documentation provides an overview of the code and file structure for the `scheduling_agent` repository.  
-The focus is on explaining how the Python modules interact, how the agent works internally, and how the project is organized.
+This documentation explains the updated code base for the **scheduling_agent** project (now centred on `agent2.py`). The assistant converses in natural language, builds a JSON schema of your company, and calls scheduling tools to generate shifts.
 
 The Scheduling Agent allows users to interactively describe their company and employee information, build a JSON schema, and generate employee work schedules using constraint programming and AI-assisted interactions.
 
@@ -11,14 +10,15 @@ The Scheduling Agent allows users to interactively describe their company and em
 
 scheduling_agent/
 │
-├── agent.py         # SchedulingAgent class (conversation + schema handling)
+├── agent2.py        # Main interactive agent (natural‑language conversation + schema & scheduling)
+├── agent.py         # Legacy structured‑prompt agent (kept for reference)
 ├── tools.py         # Scheduling functions (basic, optimized, partial schedules)
 │
 ├── data/
 │   ├── current_schema.json    # Last used company schema (generated at runtime)
 │   ├── examples/              # Examples of text descriptions to give the agent
 │
-├── run.py              # Entry point script to start the agent
+├── README.md          # Quick‑start and project overview
 ├── requirements.txt    # Project dependencies
 ├── documentation.md    # This documentation file
 │
@@ -28,20 +28,25 @@ scheduling_agent/
 
 ## File Descriptions
 
-### 1. `run.py`
+### 1. `agent2.py`
 
-The main executable script.  
-It initializes the SchedulingAgent and handles the following:
+The primary executable script and main conversation loop.
 
-- Checks if a saved schema (`data/current_schema.json`) exists.
-- If yes, loads the existing company schema.
-- If no, asks the user structured questions to build a new schema.
-- Starts the main user interaction loop by calling `agent.run()`.
+- Launches an interactive chat‑style session in the terminal.
+- Parses free‑form user messages, extracts/updates the JSON scheduling schema.
+- Delegates schedule generation to tools in `tools.py`.
+- Persists the current schema to `data/current_schema.json` after each successful update.
+- Provides debug output flags (see `--debug` CLI option) for troubleshooting.
 
-**Key functions:**
-- `load_existing_schema(filepath)`: Load saved schema.
-- `save_schema(schema, filepath)`: Save new schema.
-- Running `agent.run()` launches either schema editing or schedule building modes.
+Key methods inside `SchedulingAgent2`:
+- `_llm(...)` – wrapper around OpenAI Chat completion.
+- `_extract_schema_from_text(...)` – regex/JSON extraction helper.
+- `handle_user(...)` – single‑turn processing (parse → decide → respond).
+
+### Legacy Files
+
+* `agent.py` and `run.py` illustrate an earlier, more rigid question‑by‑question flow.
+  They remain in the repo for comparison but are **not used** in the recommended workflow.
 
 ---
 
@@ -92,7 +97,7 @@ multiple strategies for building schedules from a schema.
 
 The flow between the main files is as follows:
 
-1. `run.py` starts the system and loads or builds a company schema.
+1. `agent2.py` starts the system, loads or creates the JSON schema, and drives the conversation.
 2. `agent.py` manages the conversation:
    - Collects initial inputs
    - Builds or edits the schema
@@ -160,4 +165,4 @@ Install dependencies with:
 - This documentation focuses on code structure and interactions.
 - Broader project motivation, limitations, and future goals are discussed separately in the final project report.
 
----
+---</file>

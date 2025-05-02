@@ -1,9 +1,29 @@
+"""
+agent2.py
+=========
+Conversational, tool‑aware scheduling assistant (“ScheduleGPT”).
+
+* Collects company/shift/employee data via natural‑language chat.
+* Builds a JSON schema in‑memory.
+* Invokes backend scheduling tools (from *tools.py*) once enough
+  information is known.
+* Falls back gracefully and guides the user when constraints are
+  infeasible.
+
+Run this script directly and start typing — it behaves like a small
+REPL.  See the README for example sessions.
+"""
 import re
 import textwrap
 import json
 import openai
+from openai import APITimeoutError, APIConnectionError
+import time
 from tools import AVAILABLE_TOOLS, tool_functions, format_schedule_by_shift
 
+# ---------------------------------------------------------------------
+# Configuration toggles
+# ---------------------------------------------------------------------
 DEBUG = True  # global debug switch
 
 SYSTEM_PROMPT = textwrap.dedent("""
@@ -101,6 +121,17 @@ ASSISTANT: *calls build_schedule with method="cp" fairness=true*
 """)
 
 class ConversationalScheduler:
+    """
+    Stateful chat wrapper that manages:
+      • message history with the LLM
+      • an in‑memory scheduling *schema* (dict)
+      • a last generated *schedule*  (dict)
+
+    The class offers a single public method, `handle_user()`, which
+    consumes a raw user string, decides whether to ask the LLM, call a
+    backend tool, or print debugging information, and then prints the
+    assistant’s textual reply (or pretty‑formatted schedule).
+    """
     SHOW_RE   = re.compile(r"^\s*(show|print)\s+(schema|schedule)\s*$", re.I)
     RESET_RE  = re.compile(r"^\s*(reset|delete)\s+schema\s*$", re.I)
     SCHED_RE = re.compile(
@@ -118,29 +149,51 @@ class ConversationalScheduler:
     # ------- LLM helper -------------------------------------------------
     def _llm(self, *, json_only: bool = False, tools_ok: bool = True):
         client = openai.OpenAI()
+        # Base payload for the Chat Completions request.  We add tool /
+        # format directives later depending on the call site.
         params = {
             "model": self.model_name,
             "temperature": self.temperature,
             "messages": self.chat,
         }
+        if DEBUG:
+            suffix = "enabled" if tools_ok else "disabled"
+            fmt = "json‑only" if json_only else suffix
+            print(f"⚙️  [DEBUG] calling LLM ({fmt})")
+
         # decide tool / format options
         if json_only:
-            # force raw JSON; no tool calls allowed
             params["response_format"] = {"type": "json_object"}
         elif tools_ok:
             params["tools"] = AVAILABLE_TOOLS
             params["tool_choice"] = "auto"        # enable calling tools
-        # else → normal chat without tools; do NOT include tool_choice
-        if DEBUG and not tools_ok:
-            print("⚙️  [DEBUG] calling LLM with tools disabled – follow‑up generation")
-        elif DEBUG and tools_ok:
-            print("⚙️  [DEBUG] calling LLM with tools enabled (schema present)")
-        return client.chat.completions.create(**params)
+
+        # OpenAI network calls occasionally time‑out.  Retry (with a back‑off)
+        # up to three times so the CLI does not crash on a transient error.
+        for attempt in range(3):          # at most 3 tries
+            try:
+                try:
+                    # newer openai‑python accepts request_timeout
+                    return client.chat.completions.create(request_timeout=60, **params)
+                except TypeError:
+                    # fallback for older sdk versions
+                    return client.chat.completions.create(**params)
+            except (APITimeoutError, APIConnectionError) as exc:
+                if attempt == 2:
+                    raise
+                if DEBUG:
+                    print(f"⚠️  [DEBUG] LLM timeout – retry {attempt+1}/3...")
+                time.sleep(2 * (attempt + 1))
 
     # ------- single‑turn handler ---------------------------------------
     def handle_user(self, user_msg: str):
         if DEBUG:
             print(f"⚙️  [DEBUG] incoming user_msg = {repr(user_msg)}")
+        # -----------------------------------------------------------------
+        # Fast‑path: recognise a few *explicit* textual commands that the
+        # user can type without involving the LLM (show schema, show
+        # schedule, reset schema, or build schedule immediately).
+        # -----------------------------------------------------------------
         # ----- explicit user commands (quick actions) -----------------
         if self.SHOW_RE.match(user_msg):
             if "schedule" in self.SHOW_RE.match(user_msg).group(2).lower():
@@ -183,8 +236,14 @@ class ConversationalScheduler:
         # ➋ let the model respond (enable tool calls only once a schema exists)
         allow_tools = self.schema is not None
         resp = self._llm(tools_ok=allow_tools)
+        if resp is None:
+            print("⚠️  LLM request failed repeatedly; please try again later.")
+            return
         msg = resp.choices[0].message
 
+        # If the assistant reply *requests* a tool invocation we execute it
+        # synchronously here, then feed the tool’s JSON result back to the
+        # model so it can turn the raw data into a nice explanation.
         # ---------- tool call branch ----------
         if getattr(msg, "tool_calls", None):
             tc = msg.tool_calls[0]
@@ -249,6 +308,9 @@ class ConversationalScheduler:
             # (removed pretty-print schedules block)
             return
 
+        # Otherwise the assistant responded with normal chat text (may or
+        # may not embed a JSON schema block).  Parse & store any schema,
+        # and optionally auto‑invoke scheduling if the user asked for it.
         # ---------- plain text branch ----------
         if msg.content:
             m = re.search(r"```json\s*(\{.*?\})\s*```", msg.content, re.S)
@@ -282,7 +344,9 @@ class ConversationalScheduler:
             self.chat.append({"role": "assistant", "content": msg.content})
 
 
-# ----------------- simple REPL ------------------------------------------
+# ---------------------------------------------------------------------
+# CLI entry‑point
+# ---------------------------------------------------------------------
 if __name__ == "__main__":
     print("👋 Hi, I can help build your employee schedule. Tell me about your company!")
     agent = ConversationalScheduler()
@@ -297,6 +361,12 @@ if __name__ == "__main__":
         * Multi‑line paste: any burst of lines arriving within 0.25 s is
           concatenated automatically.
         """
+        # Implementation notes:
+        # * A trailing '\' on a line is treated like Shift+Enter in chat
+        #   UIs → forces a newline without sending.
+        # * For big clipboard pastes we look at *stdin readiness* and
+        #   collect lines that arrive within 0.25 s into the same message
+        #   so we don't hammer the LLM with 20 tiny requests.
         lines: list[str] = []
         prompt = "> "
         t_last = time.time()
