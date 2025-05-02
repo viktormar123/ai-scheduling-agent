@@ -1,0 +1,29 @@
+Hi! We are looking to create a shift schedule for our pizza place, “Mario’s Pizza.”
+
+We are open from 11:00 a.m. to 11:00 p.m., every day of the week.
+We usually have two shifts:
+	•	Day shift: 11:00 a.m. – 6:00 p.m.
+	•	Night shift: 5:00 p.m. – 11:00 p.m.
+(Note: There’s a one-hour overlap during the busy afternoon.)
+
+We have 12 employees:
+	•	Anna (full-time, baker, 4 years experience)
+	•	James (full-time, driver, 2 years)
+	•	Sophia (part-time 50%, cashier, also helps in kitchen)
+	•	Liam (full-time, baker, 3 years)
+	•	Mason (full-time, driver, student – prefers night shifts)
+	•	Emma (part-time 75%, cashier/kitchen)
+	•	Olivia (full-time, kitchen, can also drive)
+	•	Noah (full-time, kitchen)
+	•	Isabella (part-time 50%, cashier, only available weekends)
+	•	Lucas (full-time, driver, willing to work extra shifts)
+	•	Mia (full-time, kitchen)
+	•	Ethan (part-time 50%, driver, student)
+
+Special conditions:
+	•	Each shift must have at least one baker.
+	•	One experienced employee (3+ years) must be present on every shift.
+	•	Students (Mason and Ethan) prefer night shifts and can’t work mornings on weekdays.
+	•	Isabella is only available on weekends.
+
+Thank you!

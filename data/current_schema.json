@@ -1,0 +1,98 @@
+{
+  "company_name": "Mario pizzeria",
+  "opening_hours": {
+    "Monday": {
+      "open": "14:00",
+      "close": "22:00"
+    },
+    "Tuesday": {
+      "open": "14:00",
+      "close": "22:00"
+    },
+    "Wednesday": {
+      "open": "14:00",
+      "close": "22:00"
+    },
+    "Thursday": {
+      "open": "14:00",
+      "close": "22:00"
+    },
+    "Friday": {
+      "open": "14:00",
+      "close": "22:00"
+    },
+    "Saturday": {
+      "open": "14:00",
+      "close": "22:00"
+    },
+    "Sunday": {
+      "open": "14:00",
+      "close": "22:00"
+    }
+  },
+  "shift_structure": [
+    {
+      "name": "Day",
+      "hours": 8
+    }
+  ],
+  "employees": [
+    {
+      "name": "Viktor",
+      "role": "baker",
+      "employment_type": "full-time"
+    },
+    {
+      "name": "Krissi",
+      "role": "driver",
+      "employment_type": "full-time"
+    },
+    {
+      "name": "Bj\u00f6rn",
+      "role": "waiter",
+      "employment_type": "full-time"
+    },
+    {
+      "name": "Einar",
+      "role": "baker",
+      "employment_type": "full-time"
+    },
+    {
+      "name": "Arnar",
+      "role": "driver",
+      "employment_type": "full-time"
+    },
+    {
+      "name": "Oliver",
+      "role": "waiter",
+      "employment_type": "full-time"
+    },
+    {
+      "name": "G\u00edsli",
+      "role": "manager/owner",
+      "employment_type": "full-time"
+    }
+  ],
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
+  ],
+  "planning_period": "biweekly",
+  "shifts_per_day": 1,
+  "weekend_policy": "no",
+  "seniority_constraint": {
+    "enabled": true,
+    "senior_employees": [
+      "Viktor",
+      "Oliver",
+      "G\u00edsli"
+    ]
+  },
+  "fairness_preference": true,
+  "employee_preferences": false
+}

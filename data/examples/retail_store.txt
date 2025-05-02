@@ -1,0 +1,28 @@
+Hello! We are a small store called “Trendz Clothing” looking to organize employee shifts.
+
+Our store hours are:
+	•	Monday–Saturday: 10:00 a.m. – 8:00 p.m.
+	•	Sunday: 12:00 p.m. – 6:00 p.m.
+
+We usually have two shifts on weekdays and one shift on Sundays:
+	•	Morning: 10:00 a.m. – 3:00 p.m.
+	•	Afternoon: 2:30 p.m. – 8:00 p.m.
+(Half-hour overlap)
+
+We have 9 employees:
+	•	Emily (full-time, sales)
+	•	Jacob (full-time, cashier)
+	•	Madison (part-time 75%, sales, student – only afternoon shifts)
+	•	Samuel (full-time, inventory)
+	•	Abigail (full-time, sales)
+	•	Matthew (full-time, sales)
+	•	Sofia (full-time, cashier)
+	•	David (part-time 50%, sales and cashier)
+	•	Victoria (full-time, cleaner)
+
+Notes:
+	•	Need at least one cashier and two salespeople on every shift.
+	•	Madison is only available afternoons and weekends.
+	•	Try to rotate weekend shifts fairly among all full-time employees.
+
+Thanks a lot!

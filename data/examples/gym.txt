@@ -1,0 +1,30 @@
+Hello there!
+
+We’re a gym called “Pulse Fitness,” and we’d love help with our employee shifts.
+
+Opening hours:
+	•	Monday–Friday: 6 a.m. – 10 p.m.
+	•	Saturday–Sunday: 8 a.m. – 8 p.m.
+
+Shift times:
+	•	Morning: Opening until 2:00 p.m.
+	•	Afternoon: 1:30 p.m. – closing.
+
+We have 11 employees:
+	•	Ethan (trainer, full-time)
+	•	Olivia (reception, part-time 50%)
+	•	Aiden (trainer, full-time, prefers mornings)
+	•	Ella (reception, full-time, student – no mornings weekdays)
+	•	Lucas (cleaner, part-time 75%)
+	•	Lily (trainer, full-time)
+	•	James (manager, full-time, 5 years)
+	•	Sophia (trainer, part-time weekends)
+	•	Noah (reception, full-time)
+	•	Chloe (trainer, part-time)
+	•	Mason (maintenance, full-time)
+
+Notes:
+	•	Always need at least 1 trainer and 1 receptionist present.
+	•	James usually covers any gaps but prefers afternoons.
+	•	Sophia only works Saturdays and Sundays.
+	•	Ella is a student, no weekday mornings.

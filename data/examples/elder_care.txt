@@ -1,0 +1,33 @@
+Hello! We need help creating a work schedule for our elder care home, “Golden Years.”
+
+We are open 24/7, but need scheduling primarily for daytime and evening care shifts:
+	•	Morning shift: 7:00 a.m. – 3:00 p.m.
+	•	Evening shift: 3:00 p.m. – 11:00 p.m.
+	•	Night shift: 11:00 p.m. – 7:00 a.m. (only 1 employee needed).
+
+We have 18 employees:
+(First names)
+	•	Ava (full-time, nurse, 5 years)
+	•	Benjamin (full-time, nurse, 6 years)
+	•	Charlotte (part-time 50%, caregiver)
+	•	Daniel (full-time, nurse assistant)
+	•	Ella (part-time 75%, caregiver, student – only available afternoons and evenings)
+	•	Henry (full-time, night shift specialist)
+	•	Grace (full-time, nurse)
+	•	Jack (full-time, caregiver)
+	•	Lily (full-time, caregiver, 4 years experience)
+	•	Owen (full-time, caregiver)
+	•	Zoe (part-time 50%, night shift only)
+	•	Emily (full-time, nurse)
+	•	Leo (full-time, caregiver)
+	•	Chloe (full-time, caregiver)
+	•	William (full-time, nurse)
+	•	Amelia (full-time, nurse assistant)
+	•	Harper (full-time, caregiver)
+	•	Nathan (full-time, cleaner)
+
+Special rules:
+	•	At least one nurse must be present on every shift.
+	•	Night shifts can only be assigned to Henry and Zoe (preferred) or others if needed.
+	•	Ella is unavailable for mornings due to school.
+	•	Try to balance shifts evenly across the week for fairness.

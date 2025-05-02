@@ -1,0 +1,36 @@
+Dear Scheduling Assistant,
+
+We are requesting assistance in creating a shift schedule for the front desk reception team at Northwood Medical Center.
+
+Operational hours: 24/7.
+Shifts:
+	•	Morning: 6:00 a.m. – 2:00 p.m.
+	•	Afternoon: 2:00 p.m. – 10:00 p.m.
+	•	Night: 10:00 p.m. – 6:00 a.m.
+
+Team members (14 employees):
+	•	Emily J. (full-time, reception, 5 years, prefers mornings)
+	•	Michael S. (full-time, reception, 3 years, can cover any shift)
+	•	Sarah W. (part-time 50%, reception, student – unavailable weekdays mornings)
+	•	David R. (full-time, security desk, night shift specialist)
+	•	Anna T. (full-time, reception, 2 years, backup security)
+	•	John B. (full-time, reception, 6 years)
+	•	Jessica L. (full-time, admin tasks, backup reception)
+	•	Daniel F. (full-time, reception)
+	•	Laura M. (part-time 75%, reception, can work evenings and weekends only)
+	•	Robert D. (full-time, reception, 1 year, needs supervision on nights)
+	•	Chloe P. (part-time 50%, student, weekends only)
+	•	Samuel K. (full-time, reception)
+	•	Sophia A. (full-time, reception)
+	•	William C. (full-time, security desk, 4 years, prefers nights)
+
+Special conditions:
+	•	At least 2 receptionists must be on duty per shift.
+	•	At least 1 employee with >3 years experience should be present on each morning and afternoon shift.
+	•	Night shifts must always have either David R. or William C. as part of the team.
+	•	Students (Sarah W., Chloe P.) cannot work weekday mornings.
+	•	Laura M. only works afternoons and weekends.
+
+We are aiming for fairness in distributing weekend shifts and minimizing consecutive night shifts for non-specialized staff.
+
+Thank you.
